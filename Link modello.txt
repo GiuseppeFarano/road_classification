@@ -1,1 +1,2 @@
-https://drive.usercontent.google.com/download?id=1DGfQivLLGR-uP3INUZv6P77VrOa_rtNt&export=download
+Modello: https://drive.usercontent.google.com/download?id=1DGfQivLLGR-uP3INUZv6P77VrOa_rtNt&export=download
+Cartella utils e cartella models: https://github.com/berry-ding/ShiYu_SeaView_GRDDC2022/tree/master/yolov7
