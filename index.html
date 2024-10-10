@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenStreetMap Route</title>
+</head>
+<body>
+    <h1>Inserisci i dettagli del percorso</h1>
+    <form id="routeForm">
+        <label for="partenza">Partenza:</label>
+        <input type="text" id="partenza" name="partenza" required><br><br>
+
+        <label for="destinazione">Destinazione:</label>
+        <input type="text" id="destinazione" name="destinazione" required><br><br>
+
+        <button type="submit">Ottieni percorso</button>
+    </form>
+
+    <!-- Area dove verrà mostrato il messaggio -->
+    <div id="message"></div>
+
+    <h2>Analizza Immagini</h2>
+    <form action="/analizza" method="get">
+        <button type="submit">Avvia Analisi</button>
+    </form>
+
+    <script>
+        // Funzione per gestire la risposta del server
+        document.getElementById('routeForm').addEventListener('submit', function(event) {
+            event.preventDefault();  // Impedisce il comportamento predefinito del form
+
+            const partenza = document.getElementById('partenza').value;
+            const destinazione = document.getElementById('destinazione').value;
+
+            // Effettua una richiesta fetch al server
+            fetch(`/ottieni_coordinate?partenza=${partenza}&destinazione=${destinazione}`)
+                .then(response => response.json())
+                .then(data => {
+                    const messageDiv = document.getElementById('message');
+
+                    // Mostra il messaggio nella div 'message'
+                    if (data.success) {
+                        messageDiv.innerHTML = `<p style="color:green;">${data.message}</p>`;
+                    } else {
+                        messageDiv.innerHTML = `<p style="color:red;">${data.message}</p>`;
+                    }
+                })
+                .catch(error => {
+                    console.error('Errore:', error);
+                    document.getElementById('message').innerHTML = '<p style="color:red;">Errore durante la richiesta.</p>';
+                });
+        });
+    </script>
+</body>
+</html>
